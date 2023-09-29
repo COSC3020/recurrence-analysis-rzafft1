@@ -49,16 +49,21 @@ Solve Recurrence Relation :
 - $T(n) = 3 * (3 * T(\frac{(\frac{n}{3})}{3}) + (\frac{n}{3})^5) + n^5$
 - $T(n) = 9 * T(\frac{n}{9}) + \frac{n^5}{81} + n^5$
 - ...
-- $T(n) = 3^i * T(\frac{n}{3^i}) + in^5$
+- $T(n) = 3^{i} * T(\frac{n}{3^i}) + \displaystyle\sum_{j=0}^{i-1}{(\frac{3^j}{3^{j^i}})n^5}$
+- $T(n) = 3^{i} * T(\frac{n}{3^i}) + \displaystyle\sum_{j=0}^{i-1}{(3^{j-j^i})n^5}$
 - ...
 - since we are using a divide and conquer by three approach, we can let $i = log_{3}n$
-- ... 
-- $T(n) = 3^{log_{3}n} * T(\frac{n}{3^{log_{3}n}}) + (log_{3}n)n^5$
+- ...
+- $T(n) = 3^{log_{3}n} * T(\frac{n}{3^{log_{3}n}}) + \displaystyle\sum_{j=0}^{i={log_{3}n-1}}{(3^{j-j^{i}})n^5}$
+- $T(n) = n * T(\frac{n}{3^{log_{3}n}}) + \displaystyle\sum_{j=0}^{log_{3}n}{(3^{j-j^{i}})n^5}$
+- $T(n) = n * 1 + \displaystyle\sum_{j=0}^{log_{3}n-1}{(3^{j-j^{i}})n^5}$
+- $T(n) = n * 1 + \displaystyle\sum_{j=0}^{log_{3}n-1}{(3^{j-j^{i}})n^5}$
+- $T(n) = n * 1 + n^5 \cdot \displaystyle\sum_{j=0}^{log_{3}n-1}{(3^{j-j^{i}})}$
+- $T(n) = n * 1 + n^5 \cdot \displaystyle\sum_{j=0}^{log_{3}n-1}{(3^{j-j^{i}})}$
 - $T(n) = n * 1 + n^5log_{3}n$
 - $T(n) = n + n^5log_{3}n$
 - **NOTE** : $n^5log_{3}n$ grows faster than $n$, so we dont need to include $+n$
-- $T(n) \in \Theta(n^5log_{3}n)$
-
+- $T(n) \in O(n^5log_{3}n)$
 
 Add your answer to this markdown file. [This
 page](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions)
